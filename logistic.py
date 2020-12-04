@@ -5,6 +5,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import StratifiedKFold
 from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import f1_score
 
 data = pd.read_csv('data/complete.csv')
 
@@ -25,11 +26,13 @@ parameters = {'penalty': ['l1', 'l2'],
               'C': [.0001, .0005, .001, .005,  .01, .05,  1, 5, 10, 50, 100, 500, 1000]}
 
 skf = StratifiedKFold(n_splits=10)
-classifier = GridSearchCV(model, parameters, cv=skf)
+classifier = GridSearchCV(model, parameters, cv=skf, scoring="f1")
 classifier.fit(X_train, y_train)
 
 pd.DataFrame(classifier.cv_results_).sort_values(by='rank_test_score').head(5)
 
 best_model = LogisticRegression(penalty='l1', C=1, solver='liblinear', random_state=0)
 best_model.fit(X_train, y_train)
+
+print(f"The f1 score of the best model: {f1_score(y_test, best_model.predict(X_test))}")
 print(f'Test set accuracy of best model: {best_model.score(X_test, y_test)}')
