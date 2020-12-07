@@ -11,7 +11,7 @@ from sklearn.metrics import f1_score
 dataset = pd.read_csv("data/complete.csv")
 
 # Excluding customer ID and index because they're not relevant features
-new_dataset = dataset.iloc[:, 2:18]
+new_dataset = dataset.iloc[:, 1:18]
 features = new_dataset.loc[:, new_dataset.columns != 'card_offer'].values
 labels = new_dataset['card_offer'].values
 

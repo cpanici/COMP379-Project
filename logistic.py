@@ -8,6 +8,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import f1_score
 
 data = pd.read_csv('data/complete.csv')
+data = data.drop('customer_id', axis=1)
 
 X = data.loc[:, data.columns != 'card_offer'].values
 y = data['card_offer'].values
