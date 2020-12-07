@@ -12,9 +12,9 @@ def main() -> None:
   model = KNeighborsClassifier(n_neighbors=3)
 
   parameters = {
-    'n_neighbors': [ nbr for nbr in range(1, 10)], 
+    'n_neighbors': [nbr for nbr in range(1, 10)], 
     'weights': ["uniform", "distance"],
-    'leaf_size': [ 10 * nbr for nbr in range(1, 5)]
+    'leaf_size': [10 * nbr for nbr in range(1, 5)]
   }
 
   skf = StratifiedKFold(n_splits=10)
