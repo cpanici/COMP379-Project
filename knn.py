@@ -19,7 +19,7 @@ def main() -> None:
   skf = StratifiedKFold(n_splits=10)
   classifier = GridSearchCV(model, parameters, cv=skf, scoring="f1")
   classifier.fit(data.X_train, data.y_train)
-  
+  print(f"The best holdout f1 score is {classifier.best_score_}")
   model = KNeighborsClassifier(**classifier.best_params_)
   model.fit(data.X_train, data.y_train)
   print(f"The best parameters were {classifier.best_params_}")
