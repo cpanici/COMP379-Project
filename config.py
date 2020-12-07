@@ -5,7 +5,8 @@ from sklearn.model_selection import train_test_split
 class Data:
   def __init__(self):
     data = pd.read_csv('data/complete.csv')
-
+    data = data.drop('customer_id', axis=1)
+    
     X = data.loc[:, data.columns != 'card_offer'].values
     y = data['card_offer'].values
 
