@@ -1,9 +1,11 @@
 
+import numpy as np
 import pandas as pd
 
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import StratifiedKFold
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import f1_score
@@ -31,9 +33,12 @@ X_test_scaled = scaler.transform(X_test)
 
 rf = RandomForestClassifier()
 params = {'n_estimators': [100, 200, 400, 600, 800, 1000], 'max_depth': [10, 20, 30]}
-rf_classifier = GridSearchCV(rf, params)
+
+skf = StratifiedKFold(n_splits=10)
+rf_classifier = GridSearchCV(rf, params, cv = skf)
 rf_classifier.fit(X_train_scaled, y_train)
 
+print(rf_classifier.best_score_)
 print(rf_classifier.best_estimator_)
 
 # The best model for a random forest uses 800 trees and a max depth of 30 in this case
