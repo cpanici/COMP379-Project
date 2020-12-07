@@ -12,18 +12,19 @@ def main() -> None:
   model = KNeighborsClassifier(n_neighbors=3)
 
   parameters = {
-    'n_neighbors': [ nbr for nbr in range(1, 10)], 
-    'weights': ["uniform", "distance"],
-    'leaf_size': [ 10 * nbr for nbr in range(1, 5)]
+    'n_neighbors': [nbr for nbr in range(1, 10)], 
+    'weights': ["uniform", "distance"]
   }
 
   skf = StratifiedKFold(n_splits=10)
   classifier = GridSearchCV(model, parameters, cv=skf, scoring="f1")
   classifier.fit(data.X_train, data.y_train)
-
+  print(f"The best holdout f1 score is {classifier.best_score_}")
+  model = KNeighborsClassifier(**classifier.best_params_)
+  model.fit(data.X_train, data.y_train)
   print(f"The best parameters were {classifier.best_params_}")
-  print(f"The f1 score of the best KNN model is: {f1_score(data.y_test, classifier.predict(data.X_test))}")
-  print(f'The accuracy of best KNN model is: {classifier.score(data.X_test, data.y_test)}')
+  print(f"The f1 score of the best KNN model is: {f1_score(data.y_test, model.predict(data.X_test))}")
+  print(f'The accuracy of best KNN model is: {model.score(data.X_test, data.y_test)}')
 
 if __name__ == "__main__":
   main()
