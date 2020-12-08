@@ -52,3 +52,11 @@ print(f'Test f1 score of best random forest model: {f1_score(y_test, predictions
 
 # Test accuracy of best random forest model: 0.9775
 # Test f1 score of best random forest model: 0.9231
+
+# Predict on unseen
+unseen = pd.read_csv('data/unseen.csv')
+unseen = unseen.drop('customer_id', axis=1)
+unseen_X = scaler.transform(unseen)
+unseen['pred_card_offer'] = rf_classifier.predict(unseen_X)
+print('Predicting on unseen data... \nUnseen data predicted counts:')
+print(unseen['pred_card_offer'].value_counts())
