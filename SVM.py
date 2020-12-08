@@ -71,7 +71,8 @@ def svm() -> None:
   svmTuned = SVC(kernel='rbf') #creates a support vector machine from sklearn.svm with Gaussian kernel
   svmTunedClassifier = GridSearchCV(svmTuned, tuned_parameters, cv = skf) #preforms grid search to find optimal paramaters
   svmTunedClassifier.fit(X_train_std, y_train.ravel()) #fits the svm to the training data set
-  svmTunedClassifier.best_estimator_ #returns best estiamte of optimal parameters 
+  print("The best parameters were", svmTunedClassifier.best_estimator_) #prints best estiamte of optimal parameters  
+  print("The best holdout F1 score is", svmTunedClassifier.best_score_) #prints best f1 score of optimal parameters 
 
   #Predicting with best svc parameters
 
@@ -90,7 +91,7 @@ def svm() -> None:
   unseen = unseen.drop('customer_id', axis=1) #drops costmers ids
   unseen_std = stdsc.transform(unseen) #transforms X_train to the standardized set
   unseenPredict = svmBestClassifier.predict(unseen_std) #predicts the labels for test
-  print("Predicting on unseen data... \nUnseen data predicted counts:", unseenPredict) #printing of predictions of unseen data
+  #print("Predicting on unseen data... \nUnseen data predicted counts:", unseenPredict) #printing of predictions of unseen data
 
 if __name__ == "__main__":
   svm()
