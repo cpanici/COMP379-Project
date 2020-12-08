@@ -4,7 +4,7 @@ Credit card approval project for COMP 379 - Machine Learning
 ### [Dataset](https://www.kaggle.com/amarvw/customercreditcard)
 ### Setup
 ```
-unzip COMP379-Project.zip
+unzip COMP379-ChristianEmrysJohnJakob-FinalProject.zip
 cd COMP379-Project
 pip3 install -r requirements.txt
 ```
