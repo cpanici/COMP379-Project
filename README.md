@@ -1,9 +1,10 @@
 # COMP 379 Project
-## Emrys Kaya, John Eastwood, Jakob Veselsky, Christian Panici
+## [Emrys Kaya](https://github.com/emryskaya), [John Eastwood](https://github.com/jjge732), [Jakob Veselsky](https://github.com/jakobveselsky), [Christian Panici](https://github.com/cpanici)
 Credit card approval project for COMP 379 - Machine Learning
+### [Dataset](https://www.kaggle.com/amarvw/customercreditcard)
 ### Setup
 ```
-unzip COMP379-Project
+unzip COMP379-Project.zip
 cd COMP379-Project
 pip3 install -r requirements.txt
 ```
